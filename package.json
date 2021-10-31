@@ -1,0 +1,10 @@
+{
+  "name": "foam-form-web",
+  "version": "1.0.0",
+  "description": "easy way to create simple form",
+  "main": "index.js",
+  "repository": "https://github.com/wndudqus/foam-form-web.git",
+  "author": "JuyeongByeon <wndudqus@naver.com>",
+  "license": "MIT",
+  "private": false
+}
