@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [
       new HtmlWebpackPlugin({
-        template:'./index.html'
+        template:'./src/index.html'
       }
   )],
   module: {
@@ -17,6 +17,10 @@ module.exports = {
         use: 'ts-loader',
         include: path.resolve(__dirname, 'src'),
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css?$/i,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
@@ -29,6 +33,7 @@ module.exports = {
   },
   devServer: {
     port: 9000,
+    hot: true,
   },
   mode:'development'
 };
