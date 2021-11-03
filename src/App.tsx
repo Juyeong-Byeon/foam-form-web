@@ -12,7 +12,7 @@ export default function App() {
       <h1>{count}</h1>
       <h2>{count}</h2>
       <h3>{count}</h3>
-      <button onClick={() => dispatch(countAdded(count + 1))}>++</button>
+      <button onClick={() => dispatch(countAdded(count + 1))}>++</button>.
     </div>
   );
 }

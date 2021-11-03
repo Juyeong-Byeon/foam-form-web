@@ -12,6 +12,7 @@
     "@types/react-dom": "^17.0.10",
     "@types/react-redux": "^7.1.20",
     "@types/styled-components": "^5.1.15",
+    "mini-css-extract-plugin": "^2.4.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
@@ -23,7 +24,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --progress",
-    "dev": "webpack serve --node-env DEVELOPMENT='true' --progress"
+    "dev": "webpack serve --progress --config ./config/webpack.config.dev.js  ",
+    "prod": "webpack --progress --config ./config/webpack.config.prod.js   "
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
@@ -38,6 +40,7 @@
     "prettier": "^2.4.1",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.2.6",
-    "webpack-dev-server": "^4.4.0"
+    "webpack-dev-server": "^4.4.0",
+    "webpack-merge": "^5.8.0"
   }
 }
