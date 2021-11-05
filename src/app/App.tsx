@@ -1,6 +1,8 @@
+import { Link, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 
+import LoginPage from "./feature/login/LoginPage";
 import { countAdded } from "./feature/counterSlice";
 
 export default function App() {
@@ -8,11 +10,12 @@ export default function App() {
   const dispatch = useAppDispatch();
 
   return (
-    <div>
-      <h1>{count}</h1>
-      <h2>{count}</h2>
-      <h3>{count}</h3>
-      <button onClick={() => dispatch(countAdded(count + 1))}>++</button>.
-    </div>
+    <section>
+      <Routes>
+        <Route path="/" element={<Link to="/login">login</Link>} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="*" element={<>404</>} />
+      </Routes>
+    </section>
   );
 }
