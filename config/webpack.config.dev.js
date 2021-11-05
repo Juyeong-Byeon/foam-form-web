@@ -14,6 +14,7 @@ const webpackConfigDev = {
   devServer: {
     port: 9000,
     hot: true,
+    historyApiFallback: true,
   },
 };
 module.exports = merge(require("./webpack.config.common"), webpackConfigDev);
