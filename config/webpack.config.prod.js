@@ -5,7 +5,7 @@ const path = require("path");
 
 const webpackConfigProd = {
   mode: "production",
-  plugins: [new MiniCssExtractPlugin(), new UglifyJsPlugin()],
+  plugins: [new MiniCssExtractPlugin()],
   module: {
     rules: [
       {
@@ -20,6 +20,7 @@ const webpackConfigProd = {
         test: /\.ts(\?.*)?$/i,
         include: path.resolve(__dirname, "../src"),
         exclude: /node_modules/,
+        parallel: true,
       }),
     ],
   },

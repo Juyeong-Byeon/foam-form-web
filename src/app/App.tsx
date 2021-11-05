@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "./app/hooks";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
 
-import { countAdded } from "./app/feature/counterSlice";
+import { countAdded } from "./feature/counterSlice";
 
 export default function App() {
   const count = useAppSelector(({ counter }) => counter.count);
