@@ -1,19 +1,25 @@
 import { Link, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { selectUser, useAppDispatch, useAppSelector } from "./store/hooks";
 
 import LoginPage from "./feature/login/LoginPage";
-import { countAdded } from "./feature/counterSlice";
+import Path from "./model/Path";
 
 export default function App() {
-  const count = useAppSelector(({ counter }) => counter.count);
-  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
 
   return (
     <section>
       <Routes>
-        <Route path="/" element={<Link to="/login">login</Link>} />
-        <Route path="login" element={<LoginPage />} />
+        <Route
+          path={Path.HOME}
+          element={
+            <>
+              {user.isLogin ? <h1>welcome</h1> : <Link to="/login">login</Link>}
+            </>
+          }
+        />
+        <Route path={Path.LOGIN} element={<LoginPage />} />
         <Route path="*" element={<>404</>} />
       </Routes>
     </section>

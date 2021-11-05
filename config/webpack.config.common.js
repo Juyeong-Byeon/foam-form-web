@@ -1,9 +1,11 @@
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const dotenv = require("dotenv");
+dotenv.config();
 
 module.exports = {
   entry: "/src/index.tsx",
-  plugins: [new HtmlWebpackPlugin({ template: "/src/index.html" })],
   module: {
     rules: [
       {
@@ -22,4 +24,8 @@ module.exports = {
     path: path.resolve(__dirname, "../dist"),
     publicPath: "/",
   },
+  plugins: [
+    new HtmlWebpackPlugin({ template: "/src/index.html" }),
+    new webpack.EnvironmentPlugin(["GOOGLE_CLIENT_ID"]),
+  ],
 };
