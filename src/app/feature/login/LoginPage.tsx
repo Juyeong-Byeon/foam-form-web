@@ -4,27 +4,27 @@ import { selectUser, useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Navigate } from "react-router-dom";
 import Path from "../../model/Path";
 import React from "react";
+import User from "../../model/User";
 import { login } from "./userSlice";
 
 export default function LoginPage() {
-  const user = useAppSelector(selectUser);
+  const { user, isNewComer } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
-
-  console.log(user);
+  const isLoginUser = User.isLoginUser(user);
   return (
     <div>
       <GoogleLogin
         clientId={process.env.GOOGLE_CLIENT_ID}
         buttonText="Login"
         onSuccess={(response: GoogleLoginResponse) => {
-          dispatch(login(response.accessToken));
+          dispatch(login(response.tokenId));
         }}
         onFailure={(response) => {}}
         cookiePolicy={"single_host_origin"}
         redirectUri="/login"
-        isSignedIn={user.isLogin}
+        isSignedIn={isLoginUser}
       />
-      {user.isLogin && <Navigate to={Path.HOME} />}
+      {isLoginUser && <Navigate to={isNewComer ? Path.WELCOME : Path.HOME} />}
     </div>
   );
 }
