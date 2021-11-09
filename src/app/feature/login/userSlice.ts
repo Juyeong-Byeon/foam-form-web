@@ -22,7 +22,7 @@ const initialState: UserState = {
 
 export const login = createAsyncThunk("user/login", async (token: string) => {
   const { data } = await axios.post<UserState>(
-    "http://localhost:8000/api/login",
+    "http://localhost:8000/api/login/google",
     {
       googleToken: token,
     }
