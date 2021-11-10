@@ -106,6 +106,7 @@ section {
 }
 body {
   line-height: 1;
+  height: 100%;
 }
 ol,
 ul {
@@ -125,4 +126,33 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  line-height: 1.2;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 3.75rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
 }
