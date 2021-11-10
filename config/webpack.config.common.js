@@ -26,6 +26,6 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "/src/index.html" }),
-    new webpack.EnvironmentPlugin(["GOOGLE_CLIENT_ID"]),
+    new webpack.EnvironmentPlugin(["GOOGLE_CLIENT_ID", "SERVER"]),
   ],
 };

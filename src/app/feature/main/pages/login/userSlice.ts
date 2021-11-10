@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import User from "../../model/User";
+import User from "../../../../model/User";
 import axios from "axios";
 
 type LoginType = "guest" | "google" | "integrated";

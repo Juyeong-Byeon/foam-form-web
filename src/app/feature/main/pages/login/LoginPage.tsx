@@ -1,10 +1,14 @@
 import GoogleLogin, { GoogleLoginResponse } from "react-google-login";
-import { selectUser, useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  selectUser,
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../store/hooks";
 
 import { Navigate } from "react-router-dom";
-import Path from "../../model/Path";
+import Path from "../../../../model/Path";
 import React from "react";
-import User from "../../model/User";
+import User from "../../../../model/User";
 import { login } from "./userSlice";
 
 export default function LoginPage() {
