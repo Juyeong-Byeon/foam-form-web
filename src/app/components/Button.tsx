@@ -12,7 +12,7 @@ const Button = styled.button<ButtonProps>`
   color: ${({ theme, invert }) =>
     invert ? theme.colors.backgroundColor : theme.colors.primary};
   background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.primary : ""};
+    invert ? theme.colors.primary : theme.colors.backgroundColor};
 
   padding: ${({ theme }) => theme.spacing.s} ${({ theme }) => theme.spacing.l};
   border-radius: ${({ theme }) => theme.spacing.l};

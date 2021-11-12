@@ -5,9 +5,9 @@ import {
   useAppSelector,
 } from "../../../../store/hooks";
 
-import { Navigate } from "react-router-dom";
 import Path from "../../../../model/Path";
 import React from "react";
+import { Redirect } from "react-router-dom";
 import User from "../../../../model/User";
 import { login } from "./userSlice";
 
@@ -28,7 +28,7 @@ export default function LoginPage() {
         redirectUri="/login"
         isSignedIn={isLoginUser}
       />
-      {isLoginUser && <Navigate to={isNewComer ? Path.WELCOME : Path.HOME} />}
+      {isLoginUser && <Redirect to={isNewComer ? Path.WELCOME : Path.HOME} />}
     </div>
   );
 }
