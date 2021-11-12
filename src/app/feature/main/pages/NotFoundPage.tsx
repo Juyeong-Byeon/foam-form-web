@@ -1,30 +1,31 @@
-import React, { ReactElement } from "react";
-
 import Button from "../../../components/Button";
 import MessagePage from "../../../components/MessagePage";
 import Path from "../../../model/Path";
+import React from "react";
+import ServerPath from "../../../model/ServerPath";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-const StartButton = styled(Button)`
+const GoHomeButton = styled(Button)`
   margin: ${({ theme }) => theme.common.pixelToRem(35)};
 `;
 
-export default function MainPage(): ReactElement {
+export default function NotFoundPage() {
   const history = useHistory();
 
-  const onClickStart = () => {
-    history.push(Path.EDITOR);
+  const onClickGoHome = () => {
+    history.push(Path.HOME);
   };
 
   return (
     <MessagePage
-      title="구름처럼 가볍고 몽글몽글한 폼"
+      header={<img src={ServerPath.getFullPath(ServerPath.CharacterSad)} />}
+      title="앗, 페이지를 찾을 수 없어요."
       subTitle="쉽고 빠르고 어쩌고 저쩌고 쉽고 빠르고 어쩌고 저쩌고"
       content={
-        <StartButton onClick={onClickStart} className="start-button" invert>
-          지금 시작하기
-        </StartButton>
+        <GoHomeButton onClick={onClickGoHome} className="start-button" invert>
+          홈으로
+        </GoHomeButton>
       }
     />
   );

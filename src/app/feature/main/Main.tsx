@@ -1,7 +1,9 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
+import EditorPage from "./pages/editor/EditorPage";
 import LoginPage from "./pages/login/LoginPage";
 import MainPage from "./pages/MainPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import Path from "../../model/Path";
 import React from "react";
 import User from "../../model/User";
@@ -18,17 +20,16 @@ interface MainProps {
   user: User;
 }
 
-export default function Main({ user }: MainProps) {
-  const isLoginUser = User.isLoginUser(user);
-
+export default function Main() {
   return (
     <StyledMain>
-      <Routes>
-        <Route path={Path.HOME} element={<MainPage />} />
-        <Route path={Path.LOGIN} element={<LoginPage />} />
-        <Route path={Path.WELCOME} element={<WelcomePage />} />
-        <Route path="*" element={<>404</>} />
-      </Routes>
+      <Switch>
+        <Route path={Path.HOME} component={MainPage} exact />
+        <Route path={Path.LOGIN} component={LoginPage} exact />
+        <Route path={Path.WELCOME} component={WelcomePage} exact />
+        <Route path={Path.EDITOR} component={EditorPage} exact />
+        <Route path="*" component={NotFoundPage} />
+      </Switch>
     </StyledMain>
   );
 }
