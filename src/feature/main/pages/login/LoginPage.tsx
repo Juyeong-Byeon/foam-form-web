@@ -5,6 +5,7 @@ import {
   useAppSelector,
 } from "../../../../store/hooks";
 
+import PageSection from "../../../../components/PageSection";
 import Path from "../../../../model/Path";
 import React from "react";
 import { Redirect } from "react-router-dom";
@@ -12,11 +13,11 @@ import User from "../../../../model/User";
 import { login } from "./userSlice";
 
 export default function LoginPage() {
-  const { user, isNewComer } = useAppSelector(selectUser);
+  const { user } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const isLoginUser = User.isLoginUser(user);
   return (
-    <div>
+    <PageSection>
       <GoogleLogin
         clientId={process.env.GOOGLE_CLIENT_ID}
         buttonText="Login"
@@ -28,7 +29,7 @@ export default function LoginPage() {
         redirectUri="/login"
         isSignedIn={isLoginUser}
       />
-      {isLoginUser && <Redirect to={isNewComer ? Path.WELCOME : Path.HOME} />}
-    </div>
+      {isLoginUser && <Redirect to={Path.HOME} />}
+    </PageSection>
   );
 }

@@ -1,20 +1,19 @@
 import "./index.css";
 
-import { DefaultTheme, ThemeProvider } from "styled-components";
-
-import App from "./app/App";
+import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
-import store from "./app/store/store";
-import theme from "./app/styles/theme";
+import { ThemeProvider } from "styled-components";
+import store from "./store/store";
+import theme from "./styles/theme";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <ThemeProvider theme={theme as DefaultTheme}>
+        <ThemeProvider theme={theme}>
           <App />
         </ThemeProvider>
       </BrowserRouter>

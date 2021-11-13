@@ -1,13 +1,11 @@
 import { selectUser, useAppSelector } from "../../store/hooks";
+import { useHistory, useLocation } from "react-router-dom";
 
-import Button from "../../components/Button";
 import HeaderRight from "./HeaderRight";
 import Path from "../../model/Path";
 import React from "react";
 import ServerPath from "../../model/ServerPath";
-import User from "../../model/User";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 
 const StyledHeader = styled.header`
   height: 56px;
@@ -23,9 +21,18 @@ const ClickableImg = styled.img`
 export default function Header() {
   const { user } = useAppSelector(selectUser);
   const history = useHistory();
+  const location = useLocation();
 
   const onClickLogo = () => {
     history.push(Path.HOME);
+  };
+
+  const onClickLogin = () => {
+    history.push(Path.LOGIN);
+  };
+
+  const onClickSignUp = () => {
+    history.push(Path.SIGNUP);
   };
 
   return (
@@ -35,7 +42,12 @@ export default function Header() {
         src={ServerPath.getFullPath(ServerPath.Logo)}
         alt="main logo"
       />
-      <HeaderRight user={user} />
+      <HeaderRight
+        user={user}
+        onClickLogin={onClickLogin}
+        onClickSignUp={onClickSignUp}
+        pathName={location.pathname}
+      />
     </StyledHeader>
   );
 }
