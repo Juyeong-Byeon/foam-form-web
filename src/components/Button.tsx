@@ -10,9 +10,9 @@ const Button = styled.button<ButtonProps>`
   ${({ theme, shadow }) => (shadow ? theme.common.boxShadow : "")};
 
   color: ${({ theme, invert }) =>
-    invert ? theme.colors.backgroundColor : theme.colors.primary};
+    invert ? theme.colors.background : theme.colors.primary};
   background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.primary : theme.colors.backgroundColor};
+    invert ? theme.colors.primary : theme.colors.background};
 
   padding: ${({ theme }) => theme.spacing.s} ${({ theme }) => theme.spacing.l};
   border-radius: ${({ theme }) => theme.spacing.l};

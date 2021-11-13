@@ -7,6 +7,7 @@ const fontSizes = {
 };
 
 const spacing = {
+  xxs: pixelToRem(12),
   xs: pixelToRem(15),
   s: pixelToRem(18),
   m: pixelToRem(24),
@@ -16,8 +17,11 @@ const spacing = {
 
 const colors = {
   primary: "#438eff",
-  backgroundColor: "#ffffff",
+  background: "#ffffff",
   disabledPrimary: "#3571CC",
+  border: "rgba(0, 0, 0, 0.12);",
+  placeholder: "rgba(0, 0, 0, 0.6)",
+  text: "rgba(0, 0, 0, 0.82)",
 };
 
 const common = {

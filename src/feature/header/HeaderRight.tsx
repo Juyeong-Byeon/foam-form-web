@@ -21,8 +21,8 @@ export default function HeaderRight({
   onClickLogin,
   onClickSignUp,
 }: HeaderRightProps) {
-  const LeftButton: ReactNode = useMemo(() => {
-    switch (pathName) {
+  const getLeftButton = (path: string) => {
+    switch (path) {
       case Path.LOGIN:
         return <Button onClick={onClickSignUp}>아직 계정이 없으신가요?</Button>;
       case Path.SIGNUP:
@@ -30,7 +30,7 @@ export default function HeaderRight({
       default:
         return <Button onClick={onClickLogin}>로그인</Button>;
     }
-  }, [pathName]);
+  };
 
   return (
     <HeaderRightWrapper>
@@ -38,7 +38,7 @@ export default function HeaderRight({
         user.name
       ) : (
         <>
-          {LeftButton}
+          {getLeftButton(pathName)}
           <Button invert>회원 가입</Button>
         </>
       )}

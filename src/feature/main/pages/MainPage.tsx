@@ -5,6 +5,7 @@ import Button from "../../../components/Button";
 import MessagePage from "../../../components/MessagePage";
 import Path from "../../../model/Path";
 import ServerPath from "../../../model/ServerPath";
+import User from "../../../model/User";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
@@ -25,7 +26,7 @@ export default function MainPage(): ReactElement {
     <MessagePage
       header={<img src={ServerPath.getFullPath(ServerPath.CharacterHappy)} />}
       title={
-        user
+        User.isLoginUser(user)
           ? `${user.name}님 폼폼에 오신걸 환영 합니다!`
           : `구름처럼 몽골몽골한 폼 생성 서비스`
       }
