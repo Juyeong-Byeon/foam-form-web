@@ -1,9 +1,6 @@
-import { Link, useHistory, useLocation } from "react-router-dom";
-
 import Button from "../../components/Button";
 import Path from "../../model/Path";
 import React from "react";
-import { StyledLink } from "../../components/StyledLink";
 import User from "../../model/User";
 import styled from "styled-components";
 
@@ -13,19 +10,16 @@ const HeaderRightWrapper = styled.div`
 
 interface HeaderRightProps {
   user: User;
+  pathName: string;
+  onClickLogin: () => void;
+  onClickSignUp: () => void;
 }
-export default function HeaderRight({ user }: HeaderRightProps) {
-  const history = useHistory();
-  const location = useLocation();
-
-  const onClickLogin = () => {
-    history.push(Path.LOGIN);
-  };
-
-  const onClickSignUp = () => {
-    history.push(Path.SIGNUP);
-  };
-
+export default function HeaderRight({
+  user,
+  pathName,
+  onClickLogin,
+  onClickSignUp,
+}: HeaderRightProps) {
   const getLeftButton = (path: string) => {
     switch (path) {
       case Path.LOGIN:
@@ -43,7 +37,7 @@ export default function HeaderRight({ user }: HeaderRightProps) {
         user.name
       ) : (
         <>
-          {getLeftButton(location.pathname)}
+          {getLeftButton(pathName)}
           <Button invert>회원 가입</Button>
         </>
       )}
