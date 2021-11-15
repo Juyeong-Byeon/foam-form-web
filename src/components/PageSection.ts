@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { withErrorBoundaryView } from "../hoc/withFallbackView";
 
 const PageSection = styled.section`
   ${({ theme }) => theme.common.flexCenter}
@@ -7,4 +8,4 @@ const PageSection = styled.section`
   flex: 1;
 `;
 
-export default PageSection;
+export default withErrorBoundaryView(PageSection);

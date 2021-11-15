@@ -6,6 +6,7 @@ import Path from "../../model/Path";
 import React from "react";
 import ServerPath from "../../model/ServerPath";
 import styled from "styled-components";
+import { withErrorBoundaryView } from "../../hoc/withFallbackView";
 
 const StyledHeader = styled.header`
   height: 56px;
@@ -18,7 +19,7 @@ const ClickableImg = styled.img`
   cursor: pointer;
 `;
 
-export default function Header() {
+function Header() {
   const { user } = useAppSelector(selectUser);
   const history = useHistory();
   const location = useLocation();
@@ -51,3 +52,5 @@ export default function Header() {
     </StyledHeader>
   );
 }
+
+export default withErrorBoundaryView(Header);
