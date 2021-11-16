@@ -26,7 +26,7 @@ export default function MainPage(): ReactElement {
     <MessagePage
       header={<img src={ServerPath.getFullPath(ServerPath.CharacterHappy)} />}
       title={
-        User.isLoginUser(user)
+        User.isLoginUser(user) && isNewComer
           ? `${user.name}님 폼폼에 오신걸 환영 합니다!`
           : `구름처럼 몽골몽골한 폼 생성 서비스`
       }
