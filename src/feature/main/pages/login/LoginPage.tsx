@@ -1,4 +1,5 @@
 import GoogleLogin, { GoogleLoginResponse } from "react-google-login";
+import React, { useState } from "react";
 import {
   selectUser,
   useAppDispatch,
@@ -8,7 +9,6 @@ import {
 import Button from "../../../../components/Button";
 import PageSection from "../../../../components/PageSection";
 import Path from "../../../../model/Path";
-import React from "react";
 import { Redirect } from "react-router-dom";
 import { StyledInput } from "../../../../components/StyledInput";
 import TitledForm from "../../../../components/TitledForm";
@@ -44,11 +44,18 @@ export default function LoginPage() {
   const { user } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const isLoginUser = User.isLoginUser(user);
+
+  const [id, setId] = useState("");
+
   return (
     <PageSection>
       <LoginWrapper>
         <TitledForm title="로그인">
-          <StyledInput placeholder="아이디" />
+          <StyledInput
+            value={id}
+            placeholder="아이디"
+            onChange={(e) => setId(e.target.value)}
+          />
           <StyledInput placeholder="비밀번호" />
         </TitledForm>
         <ButtonsWrapper>

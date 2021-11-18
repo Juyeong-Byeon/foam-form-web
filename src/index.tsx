@@ -1,4 +1,6 @@
 import "./index.css";
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
