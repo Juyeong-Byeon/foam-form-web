@@ -9,10 +9,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        include: path.resolve(__dirname, "../src"),
+        test: /\.tsx|\.ts|.js$/,
         exclude: /node_modules/,
+        include: path.resolve(__dirname, "../src"),
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+          },
+        },
       },
     ],
   },
