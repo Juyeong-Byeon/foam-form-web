@@ -8,6 +8,7 @@ interface UserState {
   user: User;
   loginType: LoginType;
   isNewComer?: boolean;
+  errorCode?: string;
 }
 
 const initialState: UserState = {
@@ -18,6 +19,7 @@ const initialState: UserState = {
   },
   loginType: "guest",
   isNewComer: false,
+  errorCode: undefined,
 };
 
 export const login = createAsyncThunk("user/login", async (token: string) => {

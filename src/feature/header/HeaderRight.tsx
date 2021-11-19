@@ -25,7 +25,7 @@ export default function HeaderRight({
     switch (path) {
       case Path.LOGIN:
         return <Button onClick={onClickSignUp}>아직 계정이 없으신가요?</Button>;
-      case Path.SIGNUP:
+      case Path.REGISTER:
         return <Button onClick={onClickLogin}>이미 회원이신가요?</Button>;
       default:
         return <Button onClick={onClickLogin}>로그인</Button>;
@@ -34,14 +34,7 @@ export default function HeaderRight({
 
   return (
     <HeaderRightWrapper>
-      {User.isLoginUser(user) ? (
-        user.name
-      ) : (
-        <>
-          {getLeftButton(pathName)}
-          <Button invert>회원 가입</Button>
-        </>
-      )}
+      {User.isLoginUser(user) ? user.name : <>{getLeftButton(pathName)}</>}
     </HeaderRightWrapper>
   );
 }
