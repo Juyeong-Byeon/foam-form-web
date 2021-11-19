@@ -1,7 +1,7 @@
 enum Path {
   HOME = "/",
   LOGIN = "/login",
-  SIGNUP = "/signup",
+  REGISTER = "/register",
   WELCOME = "/welcome",
   EDITOR = "/editor",
 }

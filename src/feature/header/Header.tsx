@@ -33,7 +33,7 @@ function Header() {
   };
 
   const onClickSignUp = () => {
-    history.push(Path.SIGNUP);
+    history.push(Path.REGISTER);
   };
 
   return (
