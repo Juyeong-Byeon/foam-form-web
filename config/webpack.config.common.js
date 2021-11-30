@@ -3,15 +3,16 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const dotenv = require("dotenv");
-dotenv.config();
+
+dotenv.config({ path : path.resolve(__dirname,"../.env") });
 
 module.exports = {
-  entry: "/src/index.tsx",
+  entry: path.resolve(__dirname, "../src/index.tsx"),
   module: {
     rules: [
       {
         test: /\.tsx|\.ts|.js$/,
-        exclude: /node_modules/,
+        exclude:  path.resolve(__dirname, "../node_modules/"),
         include: path.resolve(__dirname, "../src"),
         use: {
           loader: "babel-loader",
@@ -37,7 +38,7 @@ module.exports = {
   },
   plugins: [
     new ReactRefreshWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: "/src/index.html" }),
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, "../src/index.html")}),
     new webpack.EnvironmentPlugin(["GOOGLE_CLIENT_ID", "SERVER"]),
   ],
 };

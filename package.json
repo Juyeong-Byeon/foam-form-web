@@ -14,15 +14,15 @@
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
     "react-redux": "^7.2.6",
-    "react-router-dom": "^5.3.2",
+    "react-router-dom": "^5.3.0",
     "regenerator-runtime": "^0.13.9",
     "styled-components": "^5.3.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --progress",
-    "dev": "webpack serve --progress --config ./config/webpack.config.dev.js  ",
-    "prod": "webpack --progress --config ./config/webpack.config.prod.js   "
+    "dev": "webpack  serve --progress --mode=development --config ./config/webpack.config.dev.js  ",
+    "prod": "webpack    --progress --mode=production --config ./config/webpack.config.prod.js   "
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
