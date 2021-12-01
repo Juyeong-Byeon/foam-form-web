@@ -34,7 +34,7 @@ export default function HeaderRight({
 
   return (
     <HeaderRightWrapper>
-      {User.isLoginUser(user) ? user.name : <>{getLeftButton(pathName)}</>}
+      {User.isLoginUser(user) ? user.username : <>{getLeftButton(pathName)}</>}
     </HeaderRightWrapper>
   );
 }
