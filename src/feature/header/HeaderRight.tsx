@@ -1,8 +1,8 @@
 import React, { ReactNode, useMemo } from "react";
 
 import Button from "../../components/Button";
-import Path from "../../model/Path";
-import User from "../../model/User";
+import Path from "../../shared/model/Path";
+import User from "../../shared/model/User";
 import styled from "styled-components";
 
 const HeaderRightWrapper = styled.div`

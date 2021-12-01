@@ -1,10 +1,10 @@
 import { selectUser, useAppSelector } from "../../../../store/hooks";
 
 import PageSection from "../../../../components/PageSection";
-import Path from "../../../../model/Path";
+import Path from "../../../../shared/model/Path";
 import React from "react";
 import { Redirect } from "react-router-dom";
-import User from "../../../../model/User";
+import User from "../../../../shared/model/User";
 
 export default function EditorPage() {
   const { user } = useAppSelector(selectUser);

@@ -2,9 +2,9 @@ import { selectUser, useAppSelector } from "../../store/hooks";
 import { useHistory, useLocation } from "react-router-dom";
 
 import HeaderRight from "./HeaderRight";
-import Path from "../../model/Path";
+import Path from "../../shared/model/Path";
 import React from "react";
-import ServerPath from "../../model/ServerPath";
+import ServerPath from "../../shared/model/ServerPath";
 import styled from "styled-components";
 import { withErrorBoundaryView } from "../../hoc/withFallbackView";
 
