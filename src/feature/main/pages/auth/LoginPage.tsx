@@ -10,12 +10,11 @@ import Path from "../../../../model/Path";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import User from "../../../../model/User";
-import { login } from "./userSlice";
+import { googleSignup } from "./userSlice";
 import { useLogin } from "./hooks";
 
 export default function LoginPage() {
   const { user } = useAppSelector(selectUser);
-  const dispatch = useAppDispatch();
   const isLoginUser = User.isLoginUser(user);
   const { submit } = useLogin();
 
@@ -24,9 +23,7 @@ export default function LoginPage() {
       <AuthForm
         type="login"
         onSubmit={submit}
-        onSuccessGoogle={(response) => {
-          dispatch(login(response.tokenId));
-        }}
+        onSuccessGoogle={() => {}}
         onFailGoogle={() => {}}
       />
       {isLoginUser && <Redirect to={Path.HOME} />}

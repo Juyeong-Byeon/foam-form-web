@@ -27,7 +27,7 @@ export default function MainPage(): ReactElement {
       header={<img src={ServerPath.getFullPath(ServerPath.CharacterHappy)} />}
       title={
         User.isLoginUser(user) && isNewComer
-          ? `${user.name}님 폼폼에 오신걸 환영 합니다!`
+          ? `${user.username}님 폼폼에 오신걸 환영 합니다!`
           : `구름처럼 몽골몽골한 폼 생성 서비스`
       }
       subTitle="쉽고 빠르고 어쩌고 저쩌고 쉽고 빠르고 어쩌고 저쩌고"
