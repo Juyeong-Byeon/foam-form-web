@@ -2,6 +2,8 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import User from '../../../../shared/model/User';
 import axios from 'axios';
+import ApiAgent from '../../../../shared/agent/ApiAgent';
+import { AuthResultCode } from '../../../../shared/model/AuthResultCode';
 
 type LoginType = 'guest' | 'google' | 'integrated';
 interface UserState {
@@ -26,8 +28,6 @@ export const googleSignup = createAsyncThunk('user/google/login', async (token: 
 	const { data } = await axios.post<UserState>('http://localhost:8000/api/auth/signup/google', {
 		googleToken: token,
 	});
-
-	console.log(data);
 
 	if (0 < data?.user?.idx) return data;
 	else throw Error('가입에 실패했습니다.');
