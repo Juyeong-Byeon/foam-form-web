@@ -1,26 +1,47 @@
 import React, { ReactChild, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-type Status = 'WARN' | 'SUCCESS';
+export type Status = 'WARN' | 'SUCCESS';
 
-const Wrapper = styled.div<{ state: Status }>`
+const Wrapper = styled.div<{ status: Status }>`
 	width: 100%;
 	height: 100%;
+
+	${({ status }) =>
+		status === 'SUCCESS' &&
+		css`
+			& > * {
+				border-color: ${({ theme }) => theme.colors.primary} !important;
+			}
+		`}
+
+	${({ status }) =>
+		status === 'WARN' &&
+		css`
+			& > * {
+				border-color: ${({ theme }) => theme.colors.danger} !important;
+			}
+		`}
 `;
 
-const MessageWrapper = styled.div``;
+const MessageWrapper = styled.div<{ status: Status }>`
+	height: ${({ theme }) => theme.spacing.xxs};
+	font-size: ${({ theme }) => theme.fontSizes.info};
+
+	${({ status, theme }) => (status === 'WARN' ? `color: ${theme.colors.danger}` : '')}
+`;
 
 interface Props {
-	state?: Status;
+	status?: Status;
 	message: string;
 	children: ReactChild;
 }
 
-function StatusWrapper({ state, message, children }: Props) {
+function StatusWrapper({ status, message, children }: Props) {
 	return (
-		<Wrapper state={state}>
+		<Wrapper status={status}>
 			{children}
-			{state && <MessageWrapper> {message}</MessageWrapper>}
+			<MessageWrapper status={status}> {status == 'WARN' && message}</MessageWrapper>
 		</Wrapper>
 	);
 }

@@ -4,6 +4,7 @@ const fontSizes = {
 	title: pixelToRem(60),
 	subtitle: pixelToRem(30),
 	paragraph: pixelToRem(16),
+	info: pixelToRem(12),
 };
 
 const spacing = {
@@ -21,6 +22,7 @@ const colors = {
 	disabledPrimary: '#3571CC',
 	border: 'rgba(0, 0, 0, 0.12);',
 	placeholder: 'rgba(0, 0, 0, 0.6)',
+	danger: 'red',
 	text: 'rgba(0, 0, 0, 0.82)',
 };
 

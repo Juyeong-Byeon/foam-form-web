@@ -41,11 +41,14 @@ const userReducer = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(googleSignup.fulfilled, (state: UserState, payloadAction: PayloadAction<UserState>) => {
-				state.user = payloadAction.payload.user;
-				state.loginType = payloadAction.payload.loginType;
-				state.isNewComer = payloadAction.payload.isNewComer;
-			})
+			.addCase(
+				googleSignup.fulfilled,
+				(state: UserState, payloadAction: PayloadAction<UserState>) => {
+					state.user = payloadAction.payload.user;
+					state.loginType = payloadAction.payload.loginType;
+					state.isNewComer = payloadAction.payload.isNewComer;
+				},
+			)
 			.addCase(googleSignup.rejected, (state: UserState) => {
 				state.isNewComer = false;
 				state.user = initialState.user;

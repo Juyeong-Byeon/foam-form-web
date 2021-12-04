@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 
 import Button from '../../../../components/Button';
 import Path from '../../../../shared/model/Path';
-import { StyledInput } from '../../../../components/StyledInput';
 import TitledForm from '../../../../components/TitledForm';
 import styled from 'styled-components';
 import AuthValidator from './model/AuthValidator';
-import { StatusWrapper } from '../../../../components/StateWrapper';
+import { useAuthValidator } from './hooks';
+import { StatusInput } from '../../../../components/StatusInput';
 
 const LoginWrapper = styled.div`
 	width: ${({ theme }) => theme.common.pixelToRem(440)};
@@ -37,77 +37,70 @@ interface AuthFormProps {
 	authValidator: AuthValidator;
 }
 
-export default function AuthForm({ type, onSubmit, onSuccessGoogle, onFailGoogle, authValidator }: AuthFormProps) {
-	const title = type === 'register' ? '회원가입' : '로그인';
-
+export default function AuthForm({
+	type,
+	onSubmit,
+	onSuccessGoogle,
+	onFailGoogle,
+	authValidator,
+}: AuthFormProps) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordCheck, setPasswordCheck] = useState('');
 
-	const onChangeId = (event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.currentTarget.value);
-	const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.currentTarget.value);
+	const title = type === 'register' ? '회원가입' : '로그인';
+	const getStatus = (value: string, success: boolean) => {
+		if (!value) return null;
+		else return success ? 'SUCCESS' : 'WARN';
+	};
+
+	const { userNameValidation, passwordValidation, passwordCheckValidation, canSubmit } =
+		useAuthValidator(authValidator, username, password, passwordCheck);
+
+	const onChangeId = (event: React.ChangeEvent<HTMLInputElement>) =>
+		setUsername(event.currentTarget.value);
+	const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) =>
+		setPassword(event.currentTarget.value);
 	const onChangePasswordCheck = (event: React.ChangeEvent<HTMLInputElement>) =>
 		setPasswordCheck(event.currentTarget.value);
 	const submit = () => onSubmit(username, password, passwordCheck);
 
-	const getStatus = (success: boolean) => (success ? 'SUCCESS' : 'WARN');
-
-	const { validatePassword, validatePasswordCheck, validateUsername } = authValidator;
-
 	return (
 		<LoginWrapper>
 			<TitledForm title={title}>
-				<StatusWrapper
-					state={getStatus(validateUsername(username).isValid)}
-					message={validateUsername(username)?.message}
-				>
-					<StyledInput
-						name="id"
-						value={username}
-						onChange={onChangeId}
-						placeholder="아이디"
-						autoComplete="id"
-					/>
-				</StatusWrapper>
-				<StatusWrapper
-					state={getStatus(validatePassword(password).isValid)}
-					message={validatePassword(password)?.message}
-				>
-					<StyledInput
-						name="password"
-						value={password}
-						onChange={onChangePassword}
-						placeholder="비밀번호"
-						type="password"
-						autoComplete="password"
-					/>
-				</StatusWrapper>
+				<StatusInput
+					status={getStatus(username, userNameValidation.isValid)}
+					statusMessage={userNameValidation.message}
+					inputName="id"
+					value={username}
+					onChange={onChangeId}
+					placeholder="아이디"
+					autoComplete="id"
+				/>
+				<StatusInput
+					status={getStatus(password, passwordValidation.isValid)}
+					statusMessage={passwordValidation?.message}
+					inputName="password"
+					value={password}
+					onChange={onChangePassword}
+					placeholder="비밀번호"
+					type="password"
+					autoComplete="password"
+				/>
 				{type === 'register' && (
-					<StatusWrapper
-						state={getStatus(validatePasswordCheck(password, passwordCheck).isValid)}
-						message={validatePasswordCheck(password, passwordCheck)?.message}
-					>
-						<StyledInput
-							name="passwordCheck"
-							value={passwordCheck}
-							onChange={onChangePasswordCheck}
-							placeholder="비밀번호 확인"
-							type="password"
-							autoComplete="password"
-						/>
-					</StatusWrapper>
+					<StatusInput
+						status={getStatus(passwordCheck, passwordCheckValidation.isValid)}
+						statusMessage={passwordCheckValidation?.message}
+						inputName="passwordCheck"
+						value={passwordCheck}
+						onChange={onChangePasswordCheck}
+						placeholder="비밀번호 확인"
+						type="password"
+					/>
 				)}
 			</TitledForm>
 			<ButtonsWrapper>
-				<Button
-					disabled={
-						!validateUsername(username).isValid ||
-						!validatePassword(password).isValid ||
-						!validatePasswordCheck(password, passwordCheck).isValid
-					}
-					onClick={submit}
-					invert
-				>
+				<Button disabled={!canSubmit} onClick={submit} invert>
 					{title}
 				</Button>
 				OR

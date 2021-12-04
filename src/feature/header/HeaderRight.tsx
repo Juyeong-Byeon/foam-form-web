@@ -1,40 +1,49 @@
-import React, { ReactNode, useMemo } from "react";
-
-import Button from "../../components/Button";
-import Path from "../../shared/model/Path";
-import User from "../../shared/model/User";
-import styled from "styled-components";
+import React from 'react';
+import Button from '../../components/Button';
+import Path from '../../shared/model/Path';
+import User from '../../shared/model/User';
+import styled from 'styled-components';
+import { StyledLink } from '../../components/StyledLink';
 
 const HeaderRightWrapper = styled.div`
-  color: ${({ theme }) => theme.colors.primary};
+	color: ${({ theme }) => theme.colors.primary};
+`;
+
+const SubLink = styled(StyledLink)`
+	margin-right: ${({ theme }) => theme.spacing.s};
 `;
 
 interface HeaderRightProps {
-  user: User;
-  pathName: string;
-  onClickLogin: () => void;
-  onClickSignUp: () => void;
+	user: User;
+	pathName: string;
+	onClickLogin: () => void;
+	onClickSignUp: () => void;
 }
 export default function HeaderRight({
-  user,
-  pathName,
-  onClickLogin,
-  onClickSignUp,
+	user,
+	pathName,
+	onClickLogin,
+	onClickSignUp,
 }: HeaderRightProps) {
-  const getLeftButton = (path: string) => {
-    switch (path) {
-      case Path.LOGIN:
-        return <Button onClick={onClickSignUp}>아직 계정이 없으신가요?</Button>;
-      case Path.REGISTER:
-        return <Button onClick={onClickLogin}>이미 회원이신가요?</Button>;
-      default:
-        return <Button onClick={onClickLogin}>로그인</Button>;
-    }
-  };
+	return (
+		<HeaderRightWrapper>
+			{!User.isLoginUser(user) &&
+				(pathName === Path.REGISTER ? (
+					<>
+						<SubLink to={Path.LOGIN}>이미 회원이신가요?</SubLink>
 
-  return (
-    <HeaderRightWrapper>
-      {User.isLoginUser(user) ? user.username : <>{getLeftButton(pathName)}</>}
-    </HeaderRightWrapper>
-  );
+						<Button onClick={onClickLogin} invert>
+							로그인
+						</Button>
+					</>
+				) : (
+					<>
+						<SubLink to={Path.REGISTER}> 아직 계정이 없으신가요?</SubLink>
+						<Button onClick={onClickSignUp} invert>
+							회원가입
+						</Button>
+					</>
+				))}
+		</HeaderRightWrapper>
+	);
 }

@@ -4,7 +4,7 @@ interface AuthValidator {
 	validatePasswordCheck: (password: string, passwordCheck: string) => ValidationResult;
 }
 
-interface ValidationResult {
+export interface ValidationResult {
 	message: string;
 	isValid: boolean;
 }
