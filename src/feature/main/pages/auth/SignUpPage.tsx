@@ -1,47 +1,47 @@
 import React, { useRef, useState } from 'react';
-import { selectUser, useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { selectUser, useAppSelector } from '../../../../store/hooks';
+
+import ApiAgent from '../../../../shared/agent/ApiAgent';
+import { ApiResponseStatus } from '../../../../shared/model/ApiResponseStatus';
 import AuthForm from './AuthForm';
 import PageSection from '../../../../components/PageSection';
 import Path from '../../../../shared/model/Path';
 import { Redirect } from 'react-router-dom';
-import { googleSignup } from './userSlice';
-import ApiAgent from '../../../../shared/agent/ApiAgent';
-import { AuthResultCode } from '../../../../shared/model/AuthResultCode';
 import SignInValidator from './model/SignUpValidator';
 import User from '../../../../shared/model/User';
+import { signUpStatusMessageMap } from './model/SignUpStatusMessage';
 
 export default function SignUpPage() {
 	const [isSuccess, setIsSuccess] = useState(false);
 	const { current: signInValidator } = useRef(new SignInValidator());
 	const { user } = useAppSelector(selectUser);
-	const dispatch = useAppDispatch();
+
+	const onAfterSubmit = (resultCode: ApiResponseStatus) => {
+		const { message, isSuccess } = signUpStatusMessageMap[resultCode];
+		alert(message);
+		setIsSuccess(isSuccess);
+	};
 
 	const onSubmit = async (username: string, password: string) => {
-		ApiAgent.post<{ resultCode: AuthResultCode }>('auth/signup/local', {
-			username,
-			password,
-		}).then(({ resultCode }) => {
-			let message = '';
-			switch (resultCode) {
-				case 'SUCCESS':
-					setIsSuccess(true);
-					message = '회원가입에 성공했습니다.';
-					break;
+		const { resultCode = 'ERROR' } = await ApiAgent.post<{ resultCode: ApiResponseStatus }>(
+			'auth/signup/local',
+			{
+				username,
+				password,
+			},
+		);
 
-				case 'EXIST':
-					message = '이미 등록된 이메일입니다.';
-					setIsSuccess(false);
-					break;
+		onAfterSubmit(resultCode);
+	};
 
-				case 'ERROR':
-				default:
-					setIsSuccess(false);
-					message = '잠시후에 다시시도해주세요';
-					break;
-			}
-
-			alert(message);
-		});
+	const onSuccessGoogle = async (tokenId: string) => {
+		const { resultCode = 'ERROR' } = await ApiAgent.post<{ resultCode: ApiResponseStatus }>(
+			'auth/signup/google',
+			{
+				tokenId,
+			},
+		);
+		onAfterSubmit(resultCode);
 	};
 
 	return (
@@ -49,9 +49,7 @@ export default function SignUpPage() {
 			<AuthForm
 				type="register"
 				onSubmit={onSubmit}
-				onSuccessGoogle={(response) => {
-					dispatch(googleSignup(response.tokenId));
-				}}
+				onSuccessGoogle={(response) => onSuccessGoogle(response.tokenId)}
 				onFailGoogle={() => {}}
 				authValidator={signInValidator}
 			/>

@@ -27,10 +27,6 @@ export function useAuthValidator(
 	const passwordValidation = validatePassword(password);
 	const passwordCheckValidation = validatePasswordCheck(password, passwordCheck);
 
-	console.log(userNameValidation.isValid);
-	console.log(passwordValidation.isValid);
-	console.log(passwordValidation.isValid);
-
 	return {
 		userNameValidation,
 		passwordValidation,
