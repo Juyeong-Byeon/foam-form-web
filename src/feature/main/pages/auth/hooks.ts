@@ -1,8 +1,22 @@
+import ApiAgent from '../../../../shared/agent/ApiAgent';
+import { AuthResultCode } from '../../../../shared/model/AuthResultCode';
 import AuthValidator, { ValidationResult } from './model/AuthValidator';
 
 export const useLogin = () => {
-	const submit = (id: string, password: string) => {
-		alert(`${id}, ${password}`);
+	const submit = async (id: string, password: string) => {
+		try {
+			const res = await ApiAgent.post<{ resultCode: AuthResultCode; userToken: string }>(
+				'auth/signin/local',
+				{
+					id,
+					password,
+				},
+			);
+
+			if (res.resultCode !== 'SUCCESS') throw new Error(res.resultCode);
+		} catch (e) {
+			alert(e.message);
+		}
 	};
 
 	return {
@@ -26,10 +40,6 @@ export function useAuthValidator(
 	const userNameValidation = validateUsername(userName);
 	const passwordValidation = validatePassword(password);
 	const passwordCheckValidation = validatePasswordCheck(password, passwordCheck);
-
-	console.log(userNameValidation.isValid);
-	console.log(passwordValidation.isValid);
-	console.log(passwordValidation.isValid);
 
 	return {
 		userNameValidation,

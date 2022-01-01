@@ -31,7 +31,6 @@ export default function HeaderRight({
 				(pathName === Path.REGISTER ? (
 					<>
 						<SubLink to={Path.LOGIN}>이미 회원이신가요?</SubLink>
-
 						<Button onClick={onClickLogin} invert>
 							로그인
 						</Button>

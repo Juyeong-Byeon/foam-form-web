@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class ApiAgent {
-	private readonly SERVER_PATH = `http://localhost:8000/api/`;
+	private readonly SERVER_PATH = `http://localhost:8000/api`;
 
 	public async get<T>(path: string, data?: any) {
 		return await (
